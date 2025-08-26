@@ -3,6 +3,9 @@ const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello, this is the Telegram SMS Forwarder!');
+});
 app.use(express.urlencoded({ extended: false }));
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;

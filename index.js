@@ -37,7 +37,12 @@ app.post("/sms", async (req, res) => {
   res.status(200).end();
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
+app.post("/sms", (req, res) => {
+  console.log("Received SMS:", req.body);
+  res.send("OK");
+});
+
 app.listen(PORT, () => {
   console.log(`SMS Forwarder listening on port ${PORT}`);
 });

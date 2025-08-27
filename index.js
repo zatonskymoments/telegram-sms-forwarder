@@ -9,11 +9,12 @@ const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 const CHAT_ID_GROUP = process.env.CHAT_ID_GROUP;
 const CHAT_ID_OWNER = process.env.CHAT_ID_OWNER;
 
+// 🔧 Принудительно приводим chatId к строке
 const sendTelegramMessage = async (chatId, message) => {
   try {
     const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
     const res = await axios.post(url, {
-      chat_id: chatId,
+      chat_id: String(chatId),  // 💥 фикс здесь
       text: message,
     });
     console.log("✅ Message sent successfully to:", chatId);

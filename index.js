@@ -25,14 +25,17 @@ const sendTelegramMessage = async (chatId, message) => {
       error_code: error?.response?.data?.error_code,
       description: error?.response?.data?.description,
     });
+    return { error: true, details: error?.response?.data };
   }
 };
 
+// 🌐 Основная ручка для получения SMS от Twilio
 app.post("/sms", async (req, res) => {
   const from = req.body.From;
   const body = req.body.Body;
 
   console.log("📩 Incoming SMS:", { from, body });
+  console.log("🌐 Chat ID from env:", CHAT_ID_GROUP);
 
   const text = `📨 New SMS from ${from}:\n"${body}"`;
 
@@ -43,6 +46,13 @@ app.post("/sms", async (req, res) => {
   // await sendTelegramMessage(CHAT_ID_OWNER, text);
 
   res.send("OK");
+});
+
+// 🛠️ Временная ручка для отладки
+app.get("/debug", async (req, res) => {
+  const message = "🛠️ Тестовое сообщение от Render по /debug";
+  const result = await sendTelegramMessage(CHAT_ID_GROUP, message);
+  res.json(result);
 });
 
 const PORT = process.env.PORT || 3000;

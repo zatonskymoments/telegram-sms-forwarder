@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // обязательно для Telegram webhook
 
 const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
-const CHAT_ID_GROUP = process.env.CHAT_ID_GROUP;
+const CHAT_ID_GROUP = "-1003207659255"; // process.env.CHAT_ID_GROUP;
 const CHAT_ID_OWNER = process.env.CHAT_ID_OWNER;
 
 // 🔧 Принудительно приводим chatId к строке
